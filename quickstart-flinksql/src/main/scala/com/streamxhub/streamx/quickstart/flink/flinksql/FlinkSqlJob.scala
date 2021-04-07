@@ -21,7 +21,7 @@
 package com.streamxhub.streamx.quickstart.flink.flinksql
 import com.streamxhub.streamx.flink.core.scala.FlinkStreamTable
 
-object QuickStartFlinkSQLJob extends FlinkStreamTable {
+object FlinkSqlJob extends FlinkStreamTable {
 
   override def handle(): Unit = {
     /**
