@@ -11,7 +11,7 @@ public class JavaFlinkSqlJob {
         });
 
         TableContext context = new TableContext(tableEnvConfig);
-        context.sql("flinksql");
+        context.sql("flinksql",null);
     }
 
 }
