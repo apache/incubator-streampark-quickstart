@@ -22,11 +22,11 @@ package com.streamxhub.streamx.flink.quickstart.datastream;
 
 import java.io.Serializable;
 
-class JavaUser implements Serializable {
-    String name;
-    Integer age;
-    Integer gender;
-    String address;
+public class JavaUser implements Serializable {
+    public String name;
+    public Integer age;
+    public Integer gender;
+    public String address;
 
     public String toSql() {
         return String.format(
