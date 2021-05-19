@@ -40,8 +40,8 @@ flink:
     interval: 10000
   # 状态后端
   state:
-    backend: # see https://ci.apache.org/projects/flink/flink-docs-release-1.12/ops/state/state_backends.html
-      value: rocksdb
+    backend:
+      value: rocksdb #(rocksdb|hashmap)
     checkpoints.num-retained: 1
   # 重启策略
   restart-strategy:
