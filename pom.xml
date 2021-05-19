@@ -9,104 +9,49 @@
     <packaging>pom</packaging>
     <name>StreamX Quickstart</name>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <scala.binary.version>2.11</scala.binary.version>
-        <flink.version>1.12.0</flink.version>
-        <java.version>1.8</java.version>
-    </properties>
-
     <modules>
         <module>quickstart-flink</module>
         <module>quickstart-datastream</module>
         <module>quickstart-flinksql</module>
     </modules>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.48</version>
-            </dependency>
-
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>3.3.0</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-    <!--require dependencies -->
-    <dependencies>
-
-        <dependency>
-            <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-core</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <!--flink base-->
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-core</artifactId>
-            <version>${flink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-scala_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-scala_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-clients_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-statebackend-rocksdb_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-
-        <!--flink-connector-->
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-
-    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <flink112.version>1.12.0</flink112.version>
+        <flink113.version>1.13.0</flink113.version>
+        <scala.binary.version>2.11</scala.binary.version>
+        <scala.version>2.11.12</scala.version>
+        <java.version>1.8</java.version>
+        <scala.binary.version>2.11</scala.binary.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <log4j.version>2.12.1</log4j.version>
+    </properties>
 
     <build>
-        <sourceDirectory>src/main/scala</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-
-        <!--各层强制依赖-->
         <plugins>
+            <!--同时指定java和scala为源码路径-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${basedir}/src/main/java</source>
+                                <source>${basedir}/src/main/scala</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!--maven-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -153,15 +98,15 @@
         <pluginManagement>
             <plugins>
                 <!--(start) shade-->
-
-                <!-- We use the maven-shade plugin to create a fat jar that contains all necessary dependencies. -->
-                <!-- Change the value of <mainClass>...</mainClass> if your program entry point changes. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.2.4</version>
                     <executions>
-                        <!-- Run shade goal on package phase -->
+                        <execution>
+                            <id>shade-flink</id>
+                            <phase>none</phase>
+                        </execution>
                         <execution>
                             <phase>package</phase>
                             <goals>
@@ -174,13 +119,11 @@
                                         <exclude>org.apache.flink:force-shading</exclude>
                                         <exclude>com.google.code.findbugs:jsr305</exclude>
                                         <exclude>org.slf4j:*</exclude>
-                                        <exclude>org.apache.logging.log4j:*</exclude>
+                                        <exclude>log4j:*</exclude>
                                     </excludes>
                                 </artifactSet>
                                 <filters>
                                     <filter>
-                                        <!-- Do not copy the signatures in the META-INF folder.
-                                        Otherwise, this might cause SecurityExceptions when using the JAR. -->
                                         <artifact>*:*</artifact>
                                         <excludes>
                                             <exclude>META-INF/*.SF</exclude>
@@ -195,7 +138,6 @@
                 </plugin>
                 <!--(end) shade -->
 
-                <!--assembly-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
