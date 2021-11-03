@@ -25,7 +25,7 @@
     <parent>
         <groupId>com.streamxhub.streamx</groupId>
         <artifactId>quickstart-datastream</artifactId>
-        <version>1.0.0</version>
+        <version>1.2.0</version>
     </parent>
     <artifactId>datastream_1.13</artifactId>
 
@@ -49,13 +49,13 @@
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-shims_flink-1.13</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-core</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
