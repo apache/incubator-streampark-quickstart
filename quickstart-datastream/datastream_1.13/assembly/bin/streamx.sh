@@ -253,9 +253,9 @@ doStart() {
     flink run \
     $runOption \
     $jarfile \
-    $argsOption >>$app_out 2>&1 &
+    $argsOption >> "$app_out" 2>&1 &
     echo "${app_name}" >"${APP_TEMP}/.running"
-    echo_g "${app_name} starting,more detail please log:${app_out}"
+    echo_g "${app_name} starting,more detail please log:$app_out"
   fi
 }
 
