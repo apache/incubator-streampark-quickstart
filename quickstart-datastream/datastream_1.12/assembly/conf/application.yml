@@ -1,14 +1,14 @@
 flink:
   deployment:
     option:
-      target: application
+      target: yarn-per-job
       detached:
       shutdownOnAttachedExit:
       zookeeperNamespace:
       jobmanager:
     property: #@see: https://ci.apache.org/projects/flink/flink-docs-release-1.12/deployment/config.html
       $internal.application.main: com.streamxhub.streamx.flink.quickstart.datastream.QuickStartApp
-      yarn.application.name: QuickStart App(Flink 1.12)
+      pipeline.name: QuickStart App(Flink 1.12)
       taskmanager.numberOfTaskSlots: 1
       parallelism.default: 2
       jobmanager.memory:

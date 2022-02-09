@@ -48,7 +48,7 @@ done
 
 # shellcheck disable=SC2006
 PRGDIR=$(dirname "$PRG")
-EXECUTABLE=flink.sh
+EXECUTABLE=streamx.sh
 
 # Check that target executable exists
 if ${os400}; then

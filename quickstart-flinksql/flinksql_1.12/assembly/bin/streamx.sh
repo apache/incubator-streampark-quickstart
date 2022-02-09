@@ -196,7 +196,7 @@ doStart() {
   # shellcheck disable=SC2155
   local jarfile="${APP_LIB}/$(basename "${APP_BASE}").jar"
 
-  local param_cli="com.streamxhub.streamx.flink.common.conf.ParameterCli"
+  local param_cli="com.streamxhub.streamx.flink.core.conf.ParameterCli"
 
   # shellcheck disable=SC2006
   # shellcheck disable=SC2155
@@ -253,9 +253,9 @@ doStart() {
     flink run \
     $runOption \
     $jarfile \
-    $argsOption >>$app_out 2>&1 &
+    $argsOption >> "$app_out" 2>&1 &
     echo "${app_name}" >"${APP_TEMP}/.running"
-    echo_g "${app_name} starting,more detail please log:${app_out}"
+    echo_g "${app_name} starting,more detail please log:$app_out"
   fi
 }
 
