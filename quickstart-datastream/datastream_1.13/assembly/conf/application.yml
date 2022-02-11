@@ -40,6 +40,7 @@ flink:
     interval: 10000
   # 状态后端
   state:
+    checkpoint-storage: filesystem
     backend:
       value: rocksdb # 保存类型,在flink1.13中只有('rocksdb','hashmap')
     checkpoints.num-retained: 1
