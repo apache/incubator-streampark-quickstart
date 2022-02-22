@@ -53,17 +53,20 @@
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-java</artifactId>
 			<version>${flink112.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
 			<version>${flink112.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-scala_${scala.binary.version}</artifactId>
 			<version>${flink112.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -84,6 +87,12 @@
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
 			<version>${flink112.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.flink</groupId>
+					<artifactId>flink-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Add logging framework, to produce console output when running in the IDE. -->

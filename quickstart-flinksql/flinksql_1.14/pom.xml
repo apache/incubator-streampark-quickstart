@@ -70,24 +70,28 @@
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-api-scala_${scala.binary.version}</artifactId>
 			<version>${flink114.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-scala_${scala.binary.version}</artifactId>
 			<version>${flink114.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-streaming-scala_${scala.binary.version}</artifactId>
 			<version>${flink114.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-uber_${scala.binary.version}</artifactId>
 			<version>${flink114.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -101,24 +105,33 @@
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
 			<version>${flink114.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.flink</groupId>
+					<artifactId>flink-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-api-scala-bridge_${scala.binary.version}</artifactId>
 			<version>${flink114.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-planner_${scala.binary.version}</artifactId>
 			<version>${flink114.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-common</artifactId>
 			<version>${flink114.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
