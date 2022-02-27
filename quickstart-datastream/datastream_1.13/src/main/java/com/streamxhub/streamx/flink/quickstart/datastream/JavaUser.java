@@ -22,6 +22,9 @@ package com.streamxhub.streamx.flink.quickstart.datastream;
 
 import java.io.Serializable;
 
+/**
+ * @author benjobs
+ */
 public class JavaUser implements Serializable {
     public String name;
     public Integer age;
