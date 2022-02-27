@@ -20,7 +20,7 @@
  */
 package com.streamxhub.streamx.flink.quickstart.datastream;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.streamxhub.streamx.common.util.JsonUtils;
 import com.streamxhub.streamx.flink.core.StreamEnvConfig;
 import com.streamxhub.streamx.flink.core.java.function.SQLFromFunction;
 import com.streamxhub.streamx.flink.core.java.sink.JdbcSink;
@@ -42,12 +42,10 @@ public class QuickStartJavaApp {
 
         StreamingContext context = new StreamingContext(envConfig);
 
-        ObjectMapper mapper = new ObjectMapper();
-
         DataStream<JavaUser> source = new KafkaSource<String>(context)
                 .getDataStream()
                 .map((MapFunction<KafkaRecord<String>, JavaUser>) value ->
-                        mapper.readValue(value.value(), JavaUser.class))
+                        JsonUtils.read(value.value(), JavaUser.class))
                 .filter((FilterFunction<JavaUser>) value -> value.age < 30);
 
 
