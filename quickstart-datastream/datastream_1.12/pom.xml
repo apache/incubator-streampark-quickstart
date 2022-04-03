@@ -59,6 +59,18 @@
         </dependency>
 
         <dependency>
+            <groupId>com.streamxhub.streamx</groupId>
+            <artifactId>streamx-flink-connector-kafka_${scala.binary.version}</artifactId>
+            <version>${streamx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.streamxhub.streamx</groupId>
+            <artifactId>streamx-flink-connector-jdbc_${scala.binary.version}</artifactId>
+            <version>${streamx.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.22</version>

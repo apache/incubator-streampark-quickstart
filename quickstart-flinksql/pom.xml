@@ -30,7 +30,7 @@
 
     <artifactId>quickstart-flinksql</artifactId>
     <packaging>pom</packaging>
-    <name>Quickstart StreamX FlinkSQL Job</name>
+    <name>StreamX: flinksql quickstart</name>
 
     <modules>
         <module>flinksql_1.12</module>

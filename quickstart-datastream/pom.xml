@@ -29,9 +29,8 @@
     </parent>
 
     <artifactId>quickstart-datastream</artifactId>
-
     <packaging>pom</packaging>
-    <name>Quickstart StreamX DataStream Job</name>
+    <name>StreamX: dataStream quickstart</name>
 
     <modules>
         <module>datastream_1.12</module>
