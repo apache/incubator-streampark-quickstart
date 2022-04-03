@@ -25,13 +25,12 @@
     <parent>
         <groupId>com.streamxhub.streamx</groupId>
         <artifactId>streamx-quickstart</artifactId>
-        <version>1.2.2</version>
+        <version>1.2.3</version>
     </parent>
 
     <artifactId>quickstart-datastream</artifactId>
-
     <packaging>pom</packaging>
-    <name>Quickstart StreamX DataStream Job</name>
+    <name>StreamX: dataStream quickstart</name>
 
     <modules>
         <module>datastream_1.12</module>
