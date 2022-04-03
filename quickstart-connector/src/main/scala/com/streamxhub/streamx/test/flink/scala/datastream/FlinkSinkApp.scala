@@ -67,8 +67,8 @@ object FlinkSinkApp extends FlinkStreaming {
     //1)定义 RedisSink
     val sink = RedisSink()
     //2)写Mapper映射
-    val personMapper: RedisMapper[Person] = RedisMapper.builderScalaRedisMapper[Person](RedisCommand.HSET, "flink_person", _.id.toString, _.name)
-    val userMapper: RedisMapper[User] = RedisMapper.builderScalaRedisMapper[User](RedisCommand.HSET, "flink_user", _.id.toString, _.name)
+    val personMapper: RedisMapper[Person] = RedisMapper.map[Person](RedisCommand.HSET, "flink_person", _.id.toString, _.name)
+    val userMapper: RedisMapper[User] = RedisMapper.map[User](RedisCommand.HSET, "flink_user", _.id.toString, _.name)
 
   }
 

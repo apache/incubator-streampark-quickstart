@@ -20,8 +20,8 @@
  */
 package com.streamxhub.streamx.test.flink.scala.datastream
 
-import com.streamxhub.streamx.flink.connector.influxdb.domian.InfluxEntity
-import com.streamxhub.streamx.flink.connector.influxdb.sink.InfluxDBSink
+import com.streamxhub.streamx.flink.connector.influx.bean.InfluxEntity
+import com.streamxhub.streamx.flink.connector.influx.sink.InfluxSink
 import com.streamxhub.streamx.flink.core.scala.FlinkStreaming
 import org.apache.flink.streaming.api.functions.source.SourceFunction
 import org.apache.flink.streaming.api.scala._
@@ -33,18 +33,19 @@ import scala.util.Random
  */
 object InfluxDBSinkApp extends FlinkStreaming {
 
-
   override def handle(): Unit = {
     val source = context.addSource(new WeatherSource())
 
     //weather,altitude=1000,area=北 temperature=11,humidity=-4
 
-    InfluxDBSink().sink(source, "mydb")(InfluxEntity[Weather](
+    InfluxSink().sink(source, "mydb")(new InfluxEntity[Weather](
       "mydb",
       "test",
       "autogen",
-      x => Map("altitude" -> x.altitude.toString, "area" -> x.area.toString),
-      x => Map("temperature" -> x.temperature, "humidity" -> x.humidity)))
+      x => Map("altitude" -> x.altitude.toString, "area" -> x.area),
+      x => Map("temperature" -> x.temperature, "humidity" -> x.humidity)
+    ))
+
   }
 
 }

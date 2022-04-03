@@ -20,73 +20,73 @@
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-common_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-core_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-shims_flink-${streamx.flink.shims.version}_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-connector-clickhouse_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-connector-influxdb_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <artifactId>streamx-flink-connector-influx_${scala.binary.version}</artifactId>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-connector-kafka_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-connector-jdbc_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-connector-http_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-connector-hbase_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-connector-doris_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-connector-redis_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
             <artifactId>streamx-flink-connector-mongo_${scala.binary.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${streamx.version}</version>
         </dependency>
 
         <dependency>
@@ -195,15 +195,13 @@
         </dependency>
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-connector-kafka_2.12</artifactId>
-            <version>1.2.3</version>
-            <scope>compile</scope>
+            <artifactId>streamx-flink-connector-kafka_${scala.binary.version}</artifactId>
+            <version>${streamx.version}</version>
         </dependency>
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-connector-jdbc_2.12</artifactId>
-            <version>1.2.3</version>
-            <scope>compile</scope>
+            <artifactId>streamx-flink-connector-jdbc_${scala.binary.version}</artifactId>
+            <version>${streamx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
