@@ -36,10 +36,13 @@ object FlinkHttpSinkApp extends FlinkStreaming {
      * 创造读取数据的源头
      */
     val source = context.addSource(new TestSource)
+      .map(x => String.format("http://www.qq.com?id=%d", x.userId))
 
     // Redis sink..................
     //1)定义 RedisSink
-    new HttpSink(context).get(source.map((x: TestEntity) => String.format("http://www.qq.com?id=%d", x.userId))) //2)写Mapper映射
+
+    new HttpSink(context).get(source)
+    //2)写Mapper映射
   }
 
 }
