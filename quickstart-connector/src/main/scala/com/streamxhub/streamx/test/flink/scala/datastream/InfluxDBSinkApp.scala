@@ -43,7 +43,7 @@ object InfluxDBSinkApp extends FlinkStreaming {
       "test",
       "autogen",
       (x: Weather) => Map("altitude" -> x.altitude.toString, "area" -> x.area),
-      (x: Weather) => Map("temperature" -> x.temperature, "humidity" -> x.humidity)
+      (x: Weather) => Map("temperature" -> x.temperature.asInstanceOf[Object], "humidity" -> x.humidity.asInstanceOf[Object])
     )
 
     InfluxSink().sink(source, "mydb")

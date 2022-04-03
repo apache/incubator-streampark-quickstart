@@ -19,6 +19,7 @@
 
 package com.streamxhub.streamx.test.flink.java.datastream;
 
+import com.streamxhub.streamx.flink.connector.function.TransformFunction;
 import com.streamxhub.streamx.flink.connector.redis.bean.RedisMapper;
 import com.streamxhub.streamx.flink.connector.redis.sink.RedisSink;
 import com.streamxhub.streamx.flink.core.StreamEnvConfig;
@@ -40,7 +41,12 @@ public class RedisJavaApp {
         //1)定义 RedisSink
         RedisSink sink = new RedisSink(context);
         //2)写Mapper映射
-        RedisMapper<TestEntity> flink_user = RedisMapper.builderJavaRedisMapper(RedisCommand.HSET, "flink_user", (TestEntity x) -> x.userId() + "", (TestEntity x) -> x.userId() + "");
+        RedisMapper<TestEntity> flink_user = RedisMapper.map(
+                RedisCommand.HSET,
+                "flink_user",
+                (TransformFunction<TestEntity>) testEntity -> testEntity.userId() + "",
+                (TransformFunction<TestEntity>) testEntity -> testEntity.userId() + ""
+        );
         sink.sink(source, flink_user, 60000000).setParallelism(1);
         context.start();
     }

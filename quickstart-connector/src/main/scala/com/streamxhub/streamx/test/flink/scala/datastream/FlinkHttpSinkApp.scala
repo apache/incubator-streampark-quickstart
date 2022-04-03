@@ -23,12 +23,8 @@ package com.streamxhub.streamx.test.flink.scala.datastream
 import com.streamxhub.streamx.flink.connector.http.sink.HttpSink
 import com.streamxhub.streamx.flink.core.scala.FlinkStreaming
 import org.apache.flink.api.scala._
-import org.json4s.DefaultFormats
 
 object FlinkHttpSinkApp extends FlinkStreaming {
-
-  @transient
-  implicit lazy val formats: DefaultFormats.type = org.json4s.DefaultFormats
 
   override def handle(): Unit = {
 
