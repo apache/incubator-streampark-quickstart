@@ -21,12 +21,12 @@
 package com.streamxhub.streamx.flink.quickstart.datastream;
 
 import com.streamxhub.streamx.common.util.JsonUtils;
+import com.streamxhub.streamx.flink.connector.function.SQLFromFunction;
+import com.streamxhub.streamx.flink.connector.jdbc.sink.JdbcJavaSink;
+import com.streamxhub.streamx.flink.connector.kafka.source.KafkaJavaSource;
+import com.streamxhub.streamx.flink.connector.kafka.source.KafkaRecord;
 import com.streamxhub.streamx.flink.core.StreamEnvConfig;
-import com.streamxhub.streamx.flink.core.java.function.SQLFromFunction;
-import com.streamxhub.streamx.flink.core.java.sink.JdbcSink;
-import com.streamxhub.streamx.flink.core.java.source.KafkaSource;
 import com.streamxhub.streamx.flink.core.scala.StreamingContext;
-import com.streamxhub.streamx.flink.core.scala.source.KafkaRecord;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -42,14 +42,14 @@ public class QuickStartJavaApp {
 
         StreamingContext context = new StreamingContext(envConfig);
 
-        DataStream<JavaUser> source = new KafkaSource<String>(context)
+        DataStream<JavaUser> source = new KafkaJavaSource<String>(context)
                 .getDataStream()
                 .map((MapFunction<KafkaRecord<String>, JavaUser>) value ->
                         JsonUtils.read(value.value(), JavaUser.class))
                 .filter((FilterFunction<JavaUser>) value -> value.age < 30);
 
 
-        new JdbcSink<JavaUser>(context)
+        new JdbcJavaSink<JavaUser>(context)
                 .sql((SQLFromFunction<JavaUser>) JavaUser::toSql)
                 .sink(source);
 

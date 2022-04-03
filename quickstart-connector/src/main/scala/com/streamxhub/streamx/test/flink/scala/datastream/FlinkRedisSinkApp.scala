@@ -21,8 +21,8 @@
 package com.streamxhub.streamx.test.flink.scala.datastream
 
 import com.streamxhub.streamx.flink.connector.redis.bean.RedisMapper
-import com.streamxhub.streamx.flink.connector.redis.domain.RedisMapper.builderScalaRedisMapper
-import com.streamxhub.streamx.flink.connector.redis.scala.sink.RedisSink
+import com.streamxhub.streamx.flink.connector.redis.bean.RedisMapper.builderScalaRedisMapper
+import com.streamxhub.streamx.flink.connector.redis.sink.RedisSink
 import com.streamxhub.streamx.flink.core.scala.FlinkStreaming
 import org.apache.flink.api.scala._
 import org.apache.flink.streaming.connectors.redis.common.mapper.{RedisCommand}

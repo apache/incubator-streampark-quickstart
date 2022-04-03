@@ -21,9 +21,9 @@
 package com.streamxhub.streamx.flink.quickstart.datastream
 
 import com.streamxhub.streamx.common.util.JsonUtils
+import com.streamxhub.streamx.flink.connector.jdbc.sink.JdbcSink
+import com.streamxhub.streamx.flink.connector.kafka.source.KafkaSource
 import com.streamxhub.streamx.flink.core.scala.FlinkStreaming
-import com.streamxhub.streamx.flink.core.scala.sink.JdbcSink
-import com.streamxhub.streamx.flink.core.scala.source.KafkaSource
 import org.apache.flink.api.scala._
 
 object QuickStartApp extends FlinkStreaming {
@@ -59,9 +59,9 @@ object QuickStartApp extends FlinkStreaming {
 
     JdbcSink().sink[User](source)(user =>
       s"""
-        |insert into t_user(`name`,`age`,`gender`,`address`)
-        |value('${user.name}',${user.age},${user.gender},'${user.address}')
-        |""".stripMargin
+         |insert into t_user(`name`,`age`,`gender`,`address`)
+         |value('${user.name}',${user.age},${user.gender},'${user.address}')
+         |""".stripMargin
     )
   }
 
