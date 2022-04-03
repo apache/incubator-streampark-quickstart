@@ -22,8 +22,8 @@ package com.streamxhub.streamx.flink.quickstart.datastream
 
 import com.streamxhub.streamx.common.util.JsonUtils
 import com.streamxhub.streamx.flink.core.scala.FlinkStreaming
-import com.streamxhub.streamx.flink.core.scala.sink.JdbcSink
-import com.streamxhub.streamx.flink.core.scala.source.KafkaSource
+import com.streamxhub.streamx.flink.core.sink.JdbcSink
+import com.streamxhub.streamx.flink.core.source.KafkaSource
 import org.apache.flink.api.scala._
 
 object QuickStartApp extends FlinkStreaming {
