@@ -38,13 +38,15 @@ object InfluxDBSinkApp extends FlinkStreaming {
 
     //weather,altitude=1000,area=北 temperature=11,humidity=-4
 
-    InfluxSink().sink(source, "mydb")(new InfluxEntity[Weather](
+    implicit val entity = new InfluxEntity[Weather](
       "mydb",
       "test",
       "autogen",
       x => Map("altitude" -> x.altitude.toString, "area" -> x.area),
       x => Map("temperature" -> x.temperature, "humidity" -> x.humidity)
-    ))
+    )
+
+    InfluxSink().sink(source, "mydb")
 
   }
 

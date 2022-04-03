@@ -21,7 +21,6 @@
 package com.streamxhub.streamx.test.flink.scala.datastream
 
 import com.streamxhub.streamx.flink.connector.redis.bean.RedisMapper
-import com.streamxhub.streamx.flink.connector.redis.bean.RedisMapper.builderScalaRedisMapper
 import com.streamxhub.streamx.flink.connector.redis.sink.RedisSink
 import com.streamxhub.streamx.flink.core.scala.FlinkStreaming
 import org.apache.flink.api.scala._
@@ -44,7 +43,7 @@ object FlinkRedisSinkApp extends FlinkStreaming {
     //1)定义 RedisSink
     val sink = RedisSink()
     //2)写Mapper映射
-    val personMapper: RedisMapper[TestEntity] = builderScalaRedisMapper(RedisCommand.HSET, "flink_user", (x: TestEntity) => x.userId.toString, (x: TestEntity) => x.userId.toString)
+    val personMapper: RedisMapper[TestEntity] = RedisMapper.map(RedisCommand.HSET, "flink_user", (x: TestEntity) => x.userId.toString, (x: TestEntity) => x.userId.toString)
     sink.sink[TestEntity](source, personMapper, 60000000).setParallelism(1)
 
   }

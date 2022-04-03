@@ -49,14 +49,14 @@ object FlinkSinkApp extends FlinkStreaming {
     //2)下沉到目标
     //KafkaSink(context).sink(source)
 
-    val ds = source.flatMap(x => {
+    val personSource = source.flatMap(x => {
       x.split(",") match {
         case Array(d, a, b, c) => Some(Person(d.toInt, a, b.toInt, c.toInt))
         case _ => None
       }
     })
 
-    val ds2 = source.flatMap(x => {
+    val userSource = source.flatMap(x => {
       x.split(",") match {
         case Array(d, a, b, c) => Some(User(d.toInt, a, b.toInt, c.toInt))
         case _ => None
@@ -65,13 +65,14 @@ object FlinkSinkApp extends FlinkStreaming {
 
     // Redis sink..................
     //1)定义 RedisSink
-    val sink = RedisSink()
     //2)写Mapper映射
-    val personMapper: RedisMapper[Person] = RedisMapper.map[Person](RedisCommand.HSET, "flink_person", _.id.toString, _.name)
-    val userMapper: RedisMapper[User] = RedisMapper.map[User](RedisCommand.HSET, "flink_user", _.id.toString, _.name)
+    val personMapper: RedisMapper[Person] = RedisMapper.map[Person](RedisCommand.HSET, "flink_person", x => x.id.toString, x => x.name)
+    RedisSink().sink(personSource, personMapper)
+
+    val userMapper: RedisMapper[User] = RedisMapper.map[User](RedisCommand.HSET, "flink_user", x => x.id.toString, x => x.name)
+    RedisSink().sink(userSource, userMapper)
 
   }
-
 
 }
 
