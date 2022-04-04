@@ -24,9 +24,12 @@ import com.streamxhub.streamx.common.util.JsonUtils
 import com.streamxhub.streamx.flink.connector.jdbc.sink.JdbcSink
 import com.streamxhub.streamx.flink.connector.kafka.source.KafkaSource
 import com.streamxhub.streamx.flink.core.scala.FlinkStreaming
-import org.apache.flink.api.scala._
+import org.apache.flink.api.common.typeinfo.TypeInformation
 
 object QuickStartApp extends FlinkStreaming {
+
+  implicit val stringType: TypeInformation[String] = TypeInformation.of(classOf[String])
+  implicit val userType: TypeInformation[User] = TypeInformation.of(classOf[User])
 
   /**
    * 假如我们用从kafka里读取用户的数据写入到mysql中,需求如下<br/>

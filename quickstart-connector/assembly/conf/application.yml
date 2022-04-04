@@ -77,8 +77,8 @@ kafka.source:
   auto.offset.reset: earliest
     #enable.auto.commit: true
     #start.from:
-    #timestamp: 1591286400000 #指定timestamp,针对所有的topic生效
-    #offset: # 给每个topic的partition指定offset
+  #timestamp: 1591286400000 #指定timestamp,针对所有的topic生效
+  #offset: # 给每个topic的partition指定offset
   #topic: kafka01,kafka02
   #kafka01: 0:182,1:183,2:182 #分区0从182开始消费,分区1从183...
   #kafka02: 0:182,1:183,2:182
