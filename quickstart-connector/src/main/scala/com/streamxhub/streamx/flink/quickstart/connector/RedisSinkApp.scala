@@ -86,7 +86,7 @@ object FlinkSinkApp extends FlinkStreaming {
       (x: User) => x.name
     )
 
-    RedisSink().sink(userSource, userMapper)
+    RedisSink().sink(userSource, userMapper, 60000000)
 
   }
 

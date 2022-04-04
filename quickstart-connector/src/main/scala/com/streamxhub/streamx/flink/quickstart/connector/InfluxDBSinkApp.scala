@@ -40,7 +40,7 @@ object InfluxDBSinkApp extends FlinkStreaming {
 
     //weather,altitude=1000,area=北 temperature=11,humidity=-4
 
-    implicit val entity = new InfluxEntity[Weather](
+    implicit val entity: InfluxEntity[Weather] = new InfluxEntity[Weather](
       "mydb",
       "test",
       "autogen",

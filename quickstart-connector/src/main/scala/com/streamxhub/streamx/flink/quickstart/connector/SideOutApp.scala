@@ -36,7 +36,6 @@ object SideOutApp extends FlinkStreaming {
 
   implicit val entityType: TypeInformation[SideEntry] = TypeInformation.of(classOf[SideEntry])
 
-
   override def handle(): Unit = {
     val source = context.addSource(new SideSource())
 
