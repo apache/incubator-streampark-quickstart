@@ -24,7 +24,7 @@ import com.streamxhub.streamx.common.util.JsonUtils;
 import com.streamxhub.streamx.flink.connector.function.TransformFunction;
 import com.streamxhub.streamx.flink.connector.jdbc.sink.JdbcJavaSink;
 import com.streamxhub.streamx.flink.connector.kafka.source.KafkaJavaSource;
-import com.streamxhub.streamx.flink.connector.kafka.source.KafkaRecord;
+import com.streamxhub.streamx.flink.connector.kafka.bean.KafkaRecord;
 import com.streamxhub.streamx.flink.core.StreamEnvConfig;
 import com.streamxhub.streamx.flink.core.scala.StreamingContext;
 import org.apache.flink.api.common.functions.FilterFunction;
@@ -50,7 +50,7 @@ public class QuickStartJavaApp {
 
 
         new JdbcJavaSink<JavaUser>(context)
-                .sql((TransformFunction<JavaUser>) JavaUser::toSql)
+                .sql((TransformFunction<JavaUser, String>) JavaUser::toSql)
                 .sink(source);
 
         context.start();

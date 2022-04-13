@@ -43,8 +43,8 @@ public class RedisJavaApp {
         RedisMapper<Entity> flinkUser = RedisMapper.map(
                 RedisCommand.HSET,
                 "flink_user",
-                (TransformFunction<Entity>) testEntity -> testEntity.userId.toString(),
-                (TransformFunction<Entity>) testEntity -> testEntity.userId.toString()
+                (TransformFunction<Entity, String>) testEntity -> testEntity.userId.toString(),
+                (TransformFunction<Entity, String>) testEntity -> testEntity.userId.toString()
         );
         sink.sink(source, flinkUser, 60000000).setParallelism(1);
         context.start();
