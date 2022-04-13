@@ -21,7 +21,7 @@ package com.streamxhub.streamx.flink.quickstart.connector;
 
 import com.streamxhub.streamx.flink.connector.doris.sink.DorisJavaSink;
 import com.streamxhub.streamx.flink.connector.kafka.source.KafkaJavaSource;
-import com.streamxhub.streamx.flink.connector.kafka.source.KafkaRecord;
+import com.streamxhub.streamx.flink.connector.kafka.bean.KafkaRecord;
 import com.streamxhub.streamx.flink.core.StreamEnvConfig;
 import com.streamxhub.streamx.flink.core.scala.StreamingContext;
 import org.apache.flink.api.common.functions.MapFunction;
