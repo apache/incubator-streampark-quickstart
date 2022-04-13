@@ -9,6 +9,7 @@ import org.apache.hadoop.hbase.client.{Mutation, Put}
 import org.apache.hadoop.hbase.util.Bytes
 
 import java.util.{Collections, Random}
+import scala.language.implicitConversions
 
 object HBaseSinkApp extends FlinkStreaming {
 
@@ -36,9 +37,9 @@ object HBaseSinkApp extends FlinkStreaming {
 
     //2) 插入方式2
     //1.指定HBase 配置文件
-    implicit val prop = ConfigUtils.getHBaseConfig(context.parameter.toMap)
+    val prop = ConfigUtils.getHBaseConfig(context.parameter.toMap)
     //2.插入...
-    source.writeUsingOutputFormat(new HBaseOutputFormat[Entity]("order", entry2Put))
+    source.writeUsingOutputFormat(new HBaseOutputFormat[Entity]("order", prop))
 
 
   }
