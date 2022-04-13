@@ -22,7 +22,7 @@ package com.streamxhub.streamx.flink.quickstart.connector;
 import com.streamxhub.streamx.common.util.JsonUtils;
 import com.streamxhub.streamx.flink.connector.kafka.sink.KafkaJavaSink;
 import com.streamxhub.streamx.flink.connector.kafka.source.KafkaJavaSource;
-import com.streamxhub.streamx.flink.connector.kafka.source.KafkaRecord;
+import com.streamxhub.streamx.flink.connector.kafka.bean.KafkaRecord;
 import com.streamxhub.streamx.flink.core.StreamEnvConfig;
 import com.streamxhub.streamx.flink.core.scala.StreamingContext;
 import com.streamxhub.streamx.flink.quickstart.connector.bean.Behavior;
