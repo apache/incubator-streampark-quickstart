@@ -99,6 +99,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.streamxhub.streamx</groupId>
+            <artifactId>streamx-flink-connector-elasticsearch7</artifactId>
+            <version>${streamx.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.json4s</groupId>
             <artifactId>json4s-jackson_${scala.binary.version}</artifactId>
             <version>3.6.7</version>
