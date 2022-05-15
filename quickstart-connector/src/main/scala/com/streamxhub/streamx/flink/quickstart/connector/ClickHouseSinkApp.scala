@@ -10,38 +10,28 @@ object ClickHouseSinkApp extends FlinkStreaming {
   implicit val entityType: TypeInformation[Entity] = TypeInformation.of(classOf[Entity])
 
   override def handle(): Unit = {
+    // 假如在clickhouse里已经有以下表.
     val createTable =
       """
         |create TABLE test.orders(
         |userId UInt16,
-        |orderId UInt16,
         |siteId UInt8,
-        |cityId UInt8,
-        |orderStatus UInt8,
-        |price Float64,
-        |quantity UInt8,
         |timestamp UInt16
         |)ENGINE = TinyLog;
         |""".stripMargin
 
     println(createTable)
 
+    // 1) 接入数据源
     val source = context.addSource(new MyDataSource)
 
-    // 异步写入
-    ClickHouseSink().sink[Entity](source)(x => {
-      s"(${x.userId},${x.siteId})"
-    }).setParallelism(1)
+    // 2)高性能异步写入
+    ClickHouseSink().asyncSink(source)(x => {s"insert into test.orders(userId,siteId) values (${x.userId},${x.siteId})"})
 
-    // 异步写入
-    //    ClickHouseSink().sink[TestEntity](source).setParallelism(1)
-    // jdbc同步写入写入
-    //        ClickHouseSink().syncSink[TestEntity](source)(x => {
-    //          s"(${x.userId},${x.siteId})"
-    //        }).setParallelism(1)
+    //3) jdbc方式写入
+    // ClickHouseSink().jdbcSink(source)(x => {s"insert into test.orders(userId,siteId) values (${x.userId},${x.siteId})"})
 
-    // jdbc同步全字段写入
-    //    ClickHouseSink().syncSink[TestEntity](source).setParallelism(1)
+
   }
 
 }

@@ -34,12 +34,21 @@ public class ClickhouseJavaApp {
         StreamEnvConfig envConfig = new StreamEnvConfig(args, null);
         StreamingContext context = new StreamingContext(envConfig);
         DataStreamSource<Entity> source = context.getJavaEnv().addSource(new MyDataSource());
-        //1) 指定字段异步写入
-        new ClickHouseSink(context).syncSink(source, value -> String.format("(%d,%d)", value.userId, value.siteId)).setParallelism(1);
-        //2) 全字段异步写入
-        new ClickHouseSink(context).syncSink(source).setParallelism(1);
-        //3) 全字段同步写入
-        new ClickHouseSink(context).sink(source).setParallelism(1);
+
+        //2) async高性能写入
+        new ClickHouseSink(context).asyncSink(source, value ->
+                String.format("insert into test.orders(userId, siteId) values (%d,%d)", value.userId, value.siteId)
+        ).setParallelism(1);
+
+        //3) jdbc方式写入
+        /**
+         *
+         * new ClickHouseSink(context).jdbcSink(source, bean ->
+         *      String.format("insert into test.orders(userId, siteId) values (%d,%d)", bean.userId, bean.siteId)
+         * ).setParallelism(1);
+         *
+         */
         context.start();
     }
+
 }

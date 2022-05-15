@@ -8,7 +8,7 @@
         <version>1.2.3</version>
     </parent>
 
-    <artifactId>datastream-connector-example</artifactId>
+    <artifactId>quickstart-connector</artifactId>
     <name>StreamX: connector quickstart</name>
 
     <properties>
@@ -100,7 +100,7 @@
 
         <dependency>
             <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-connector-elasticsearch7</artifactId>
+            <artifactId>streamx-flink-connector-elasticsearch7_${scala.binary.version}</artifactId>
             <version>${streamx.version}</version>
             <scope>provided</scope>
         </dependency>
