@@ -1,5 +1,5 @@
 # streamx-quickstart
-StreamX 开发Flink的上手示例程序,分为三个模块`quickstart-flink`,`quickstart-datastream`,`quickstart-flinksql`
+StreamX 开发Flink的上手示例程序,分为四个模块`quickstart-flink`,`quickstart-datastream`,`quickstart-flinksql`,`quickstart-connector`
 
 ## quickstart-flink
 
@@ -13,3 +13,7 @@ quickstart-flink 是Flink官方的`SocketWindowWordCount`程序, 其中项目结
 ## quickstart-flinksql
 
 该模块主要演示了如果利用`StreamX`快速开发一个`Flink & SQL`程序,其中有`java`和`scala`两种语言的开发示例,供开发者快速上手学习使用
+
+## quickstart-connector
+
+该模块演示了如何使用`StreamX`里提供的各种 `Datastream connector` , 里面集合了各种 `Datastream connector` 的配置和使用示例, 供开发者快速上手学习使用
