@@ -23,9 +23,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.streamxhub.streamx</groupId>
+        <groupId>org.apache.streampark</groupId>
         <artifactId>quickstart-datastream</artifactId>
-        <version>1.2.3</version>
+        <version>1.2.4</version>
     </parent>
     <artifactId>datastream_1.12</artifactId>
 
@@ -47,27 +47,27 @@
         </dependency>
 
         <dependency>
-            <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-core_${scala.binary.version}</artifactId>
-            <version>${streamx.version}</version>
+            <groupId>org.apache.streampark</groupId>
+            <artifactId>streampark-flink-core_${scala.binary.version}</artifactId>
+            <version>${streampark.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-shims_flink-1.12_${scala.binary.version}</artifactId>
-            <version>${streamx.version}</version>
+            <groupId>org.apache.streampark</groupId>
+            <artifactId>streampark-flink-shims_flink-1.12_${scala.binary.version}</artifactId>
+            <version>${streampark.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-connector-kafka_${scala.binary.version}</artifactId>
-            <version>${streamx.version}</version>
+            <groupId>org.apache.streampark</groupId>
+            <artifactId>streampark-flink-connector-kafka_${scala.binary.version}</artifactId>
+            <version>${streampark.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.streamxhub.streamx</groupId>
-            <artifactId>streamx-flink-connector-jdbc_${scala.binary.version}</artifactId>
-            <version>${streamx.version}</version>
+            <groupId>org.apache.streampark</groupId>
+            <artifactId>streampark-flink-connector-jdbc_${scala.binary.version}</artifactId>
+            <version>${streampark.version}</version>
         </dependency>
 
         <dependency>

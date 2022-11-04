@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.streamxhub.streamx</groupId>
-    <artifactId>streamx-quickstart</artifactId>
-    <version>1.2.3</version>
+    <groupId>org.apache.streampark</groupId>
+    <artifactId>streampark-quickstart</artifactId>
+    <version>1.2.4</version>
     <packaging>pom</packaging>
-    <name>StreamX Quickstart</name>
+    <name>StreamPark Quickstart</name>
 
     <modules>
         <module>quickstart-flink</module>
@@ -21,9 +21,9 @@
         <flink112.version>1.12.0</flink112.version>
         <flink113.version>1.13.0</flink113.version>
         <flink114.version>1.14.0</flink114.version>
-        <streamx.version>1.2.3</streamx.version>
-        <scala.binary.version>2.11</scala.binary.version>
-        <scala.version>2.11.12</scala.version>
+        <streampark.version>1.2.4-SNAPSHOT</streampark.version>
+        <scala.binary.version>2.12</scala.binary.version>
+        <scala.version>2.12.8</scala.version>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>

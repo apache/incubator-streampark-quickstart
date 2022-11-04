@@ -23,9 +23,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.streamxhub.streamx</groupId>
+		<groupId>org.apache.streampark</groupId>
 		<artifactId>quickstart-flinksql</artifactId>
-		<version>1.2.3</version>
+		<version>1.2.4</version>
 	</parent>
 
 	<artifactId>flinksql_1.12</artifactId>
@@ -37,9 +37,9 @@
 
 		<!-- streamx -->
 		<dependency>
-			<groupId>com.streamxhub.streamx</groupId>
-			<artifactId>streamx-flink-core_${scala.binary.version}</artifactId>
-			<version>${streamx.version}</version>
+			<groupId>org.apache.streampark</groupId>
+			<artifactId>streampark-flink-core_${scala.binary.version}</artifactId>
+			<version>${streampark.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>mysql</groupId>
@@ -49,9 +49,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.streamxhub.streamx</groupId>
-			<artifactId>streamx-flink-shims_flink-1.12_${scala.binary.version}</artifactId>
-			<version>${streamx.version}</version>
+			<groupId>org.apache.streampark</groupId>
+			<artifactId>streampark-flink-shims_flink-1.12_${scala.binary.version}</artifactId>
+			<version>${streampark.version}</version>
 		</dependency>
 
 		<!-- flink base -->

@@ -23,14 +23,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.streamxhub.streamx</groupId>
-        <artifactId>streamx-quickstart</artifactId>
-        <version>1.2.3</version>
+        <groupId>org.apache.streampark</groupId>
+        <artifactId>streampark-quickstart</artifactId>
+        <version>1.2.4</version>
     </parent>
 
     <artifactId>quickstart-datastream</artifactId>
     <packaging>pom</packaging>
-    <name>StreamX: dataStream quickstart</name>
+    <name>StreamPark: dataStream quickstart</name>
 
     <modules>
         <module>datastream_1.12</module>
