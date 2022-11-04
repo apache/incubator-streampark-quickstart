@@ -1,60 +1,90 @@
 flink:
-  deployment:
-    option:
-      target: yarn-per-job
-      detached:
-      shutdownOnAttachedExit:
-      zookeeperNamespace:
-      jobmanager:
-    property: #@see: https://ci.apache.org/projects/flink/flink-docs-release-1.12/deployment/config.html
-      $internal.application.main: com.streamxhub.streamx.quickstart.flink.flinksql.JavaFlinkSqlJob
-      pipeline.name: StreamX QuickStart FlinkSQL App For Flink 1.12
-      taskmanager.numberOfTaskSlots: 1
-      parallelism.default: 2
-      jobmanager.memory:
-        flink.size:
-        heap.size:
-        jvm-metaspace.size:
-        jvm-overhead.max:
-        off-heap.size:
-        process.size:
-      taskmanager.memory:
-        flink.size:
-        framework.heap.size:
-        framework.off-heap.size:
-        managed.size:
-        process.size:
-        task.heap.size:
-        task.off-heap.size:
-        jvm-metaspace.size:
-        jvm-overhead.max:
-        jvm-overhead.min:
-        managed.fraction: 0.4
-  checkpoints:
-    enable: true
-    interval: 30000
-    mode: EXACTLY_ONCE
-    timeout: 300000
-    unaligned: true
-  watermark:
-    interval: 10000
-  # 状态后端
-  state:
-    checkpoint-storage: filesystem
-    backend:
-      value: rocksdb #(rocksdb|hashmap)
-    checkpoints.num-retained: 1
-  # 重启策略
-  restart-strategy:
-    value: fixed-delay  #重启策略[(fixed-delay|failure-rate|none)共3个可配置的策略]
-    fixed-delay:
+  option:
+    target: yarn-per-job
+    detached:
+    shutdownOnAttachedExit:
+    zookeeperNamespace:
+    jobmanager:
+  property: #@see: https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/config/
+    $internal.application.main: org.apache.streampark.quickstart.flink.flinksql.JavaFlinkSqlJob
+    pipeline.name: StreamX QuickStart FlinkSQL App For Flink 1.13
+    taskmanager.numberOfTaskSlots: 1
+    parallelism.default: 2
+    jobmanager.memory:
+      flink.size:
+      heap.size:
+      jvm-metaspace.size:
+      jvm-overhead.max:
+      off-heap.size:
+      process.size:
+    taskmanager.memory:
+      flink.size:
+      framework.heap.size:
+      framework.off-heap.size:
+      managed.size:
+      process.size:
+      task.heap.size:
+      task.off-heap.size:
+      jvm-metaspace.size:
+      jvm-overhead.max:
+      jvm-overhead.min:
+      managed.fraction: 0.4
+    pipeline:
+      auto-watermark-interval: 200ms
+    # checkpoint
+    execution:
+      checkpointing:
+        mode: EXACTLY_ONCE
+        interval: 30s
+        timeout: 10min
+        unaligned: false
+        externalized-checkpoint-retention: RETAIN_ON_CANCELLATION
+    # state backend
+    state:
+      backend: hashmap # Special note: flink1.12 optional configuration ('jobmanager', 'filesystem', 'rocksdb'), flink1.12+ optional configuration ('hashmap', 'rocksdb'),
+      backend.incremental: true
+      checkpoint-storage: filesystem
+      savepoints.dir: file:///tmp/chkdir
+      checkpoints.dir: file:///tmp/chkdir
+    # restart strategy
+    restart-strategy: fixed-delay  # Restart strategy [(fixed-delay|failure-rate|none) a total of 3 configurable strategies]
+    restart-strategy.fixed-delay:
       attempts: 3
       delay: 5000
-    failure-rate:
+    restart-strategy.failure-rate:
       max-failures-per-interval:
       failure-rate-interval:
       delay:
   # table
   table:
-    planner: blink # (blink|old|any)
-    mode: streaming #(batch|streaming)
+    table.local-time-zone: default # @see https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/dev/table/config/
+
+sql:
+  my_flinksql: |
+    CREATE TABLE datagen (
+      f_sequence INT,
+      f_random INT,
+      f_random_str STRING,
+      ts AS localtimestamp,
+      WATERMARK FOR ts AS ts
+    ) WITH (
+      'connector' = 'datagen',
+      -- optional options --
+      'rows-per-second'='5',
+      'fields.f_sequence.kind'='sequence',
+      'fields.f_sequence.start'='1',
+      'fields.f_sequence.end'='1000',
+      'fields.f_random.min'='1',
+      'fields.f_random.max'='1000000',
+      'fields.f_random_str.length'='10'
+    );
+
+    CREATE TABLE print_table (
+      f_sequence INT,
+      f_random INT,
+      f_random_str STRING
+      ) WITH (
+      'connector' = 'print'
+    );
+
+    INSERT INTO print_table select f_sequence,f_random,f_random_str from datagen;
