@@ -7,7 +7,7 @@ flink:
     jobmanager:
   property: #@see: https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/config/
     $internal.application.main: org.apache.streampark.quickstart.flink.flinksql.JavaFlinkSqlJob
-    pipeline.name: StreamX QuickStart FlinkSQL App For Flink 1.12
+    pipeline.name: streampark-quickstartFlinkSQL App For Flink 1.12
     taskmanager.numberOfTaskSlots: 1
     parallelism.default: 2
     jobmanager.memory:
