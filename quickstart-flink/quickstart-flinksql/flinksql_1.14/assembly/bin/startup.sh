@@ -44,7 +44,7 @@ done
 
 # shellcheck disable=SC2006
 PRGDIR=$(dirname "$PRG")
-EXECUTABLE=streampark.sh.
+EXECUTABLE=streampark.sh
 
 # Check that target executable exists
 if ${os400}; then
