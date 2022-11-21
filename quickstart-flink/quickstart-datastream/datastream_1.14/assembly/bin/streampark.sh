@@ -158,7 +158,6 @@ fi
 
 doStart() {
   local yaml=""
-  local sql=""
   if [[ $# -eq 0 ]]; then
     yaml="application.yml"
     echo_w "not input properties-file,use default application.yml"
@@ -170,22 +169,11 @@ doStart() {
       yaml=$(echo "$1" | awk -F 'conf/' '{print $2}')
       shift
     fi
-    if [ "$1" == "--sql" ]; then
-      shift
-      # shellcheck disable=SC2034
-      sql=$(echo "$1" | awk -F 'conf/' '{print $2}')
-      shift
-    fi
   fi
 
   local app_proper=""
   if [[ -f "$APP_CONF/$yaml" ]]; then
     app_proper="$APP_CONF/$yaml"
-  fi
-
-  local app_sql=""
-  if [[ -f "$APP_CONF/$sql" ]]; then
-    app_sql="$APP_CONF/$sql"
   fi
 
   # flink main jar...
@@ -197,6 +185,9 @@ doStart() {
   # shellcheck disable=SC2006
   # shellcheck disable=SC2155
   local app_name="$(java -cp "${jarfile}" $param_cli --name "${app_proper}")"
+
+  # shellcheck disable=SC2001
+  local safe_app_name="$(echo "$app_name" | sed "s/ /_/g")"
 
   local trim="s/^[ \s]\{1,\}//g;s/[ \s]\{1,\}$//g"
   # shellcheck disable=SC2006
@@ -230,28 +221,23 @@ doStart() {
     argsOption="--conf $app_proper"
   fi
 
-  if [ x"$app_sql" != x"" ]; then
-    argsOption="$argsOption --sql $app_sql"
-  fi
-
   if [ x"$detached_mode" == x"Detached" ]; then
     flink run \
     $runOption \
     $jarfile \
     $argsOption
-    echo "${app_name}" >"${APP_TEMP}/.running"
+    echo "${safe_app_name}" >"${APP_TEMP}/.running"
   else
     # shellcheck disable=SC2006
     # shellcheck disable=SC2155
     local app_log_date=$(date "+%Y%m%d_%H%M%S")
-    local app_out="${APP_LOG}/${app_name}-${app_log_date}.log"
-
+    local app_out="${APP_LOG}/${safe_app_name}-${app_log_date}.log"
     flink run \
     $runOption \
     $jarfile \
     $argsOption >> "$app_out" 2>&1 &
-    echo "${app_name}" >"${APP_TEMP}/.running"
-    echo_g "${app_name} starting,more detail please log:$app_out"
+    echo "${safe_app_name}" >"${APP_TEMP}/.running"
+    echo_g "${safe_app_name} starting,more detail please log:$app_out"
   fi
 }
 
