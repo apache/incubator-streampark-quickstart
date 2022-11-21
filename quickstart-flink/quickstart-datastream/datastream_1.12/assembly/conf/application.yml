@@ -22,7 +22,7 @@ flink:
     zookeeperNamespace:
     jobmanager:
   property: #@see: https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/config/
-    $internal.application.main: org.apache.streampark.flink.quickstart.QuickStartApp
+    $internal.application.main: org.apache.streampark.flink.quickstart.datastream.QuickStartApp
     pipeline.name: streampark-quickstartApp
     yarn.application.queue:
     taskmanager.numberOfTaskSlots: 1
@@ -61,8 +61,8 @@ flink:
       backend: hashmap # Special note: flink1.12 optional configuration ('jobmanager', 'filesystem', 'rocksdb'), flink1.12+ optional configuration ('hashmap', 'rocksdb'),
       backend.incremental: true
       checkpoint-storage: filesystem
-      savepoints.dir: file:///tmp/chkdir
-      checkpoints.dir: file:///tmp/chkdir
+      savepoints.dir: hdfs:///tmp/chkdir
+      checkpoints.dir: hdfs:///tmp/chkdir
     # restart strategy
     restart-strategy: fixed-delay  # Restart strategy [(fixed-delay|failure-rate|none) a total of 3 configurable strategies]
     restart-strategy.fixed-delay:

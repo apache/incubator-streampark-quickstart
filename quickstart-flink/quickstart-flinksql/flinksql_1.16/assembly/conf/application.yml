@@ -22,7 +22,7 @@ flink:
     zookeeperNamespace:
     jobmanager:
   property: #@see: https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/config/
-    $internal.application.main: org.apache.streampark.quickstart.flink.flinksql.JavaFlinkSqlJob
+    $internal.application.main: org.apache.streampark.quickstart.flink.flinksql.FlinkSqlJob
     pipeline.name: streampark quickstart flinksql job
     taskmanager.numberOfTaskSlots: 1
     parallelism.default: 2
@@ -77,7 +77,7 @@ flink:
 
 
 sql:
-  flinksql: |
+  my_flinksql: |
     CREATE TABLE datagen (
       f_sequence INT,
       f_random INT,
@@ -100,7 +100,7 @@ sql:
       f_sequence INT,
       f_random INT,
       f_random_str STRING
-      ) WITH (
+    ) WITH (
       'connector' = 'print'
     );
 

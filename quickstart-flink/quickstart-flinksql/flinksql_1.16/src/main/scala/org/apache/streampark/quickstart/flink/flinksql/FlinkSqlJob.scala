@@ -21,9 +21,9 @@ import org.apache.streampark.flink.core.scala.FlinkStreamTable
 object FlinkSqlJob extends FlinkStreamTable {
 
   override def handle(): Unit = {
-    /**
-     * 一行胜千言
-     */
-    context.sql("flinksql")
+
+    context.sql("my_flinksql")
+
   }
+
 }

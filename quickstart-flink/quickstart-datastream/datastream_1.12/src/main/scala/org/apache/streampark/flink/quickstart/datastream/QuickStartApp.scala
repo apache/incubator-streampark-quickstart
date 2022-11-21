@@ -26,29 +26,7 @@ object QuickStartApp extends FlinkStreaming {
 
   implicit val stringType: TypeInformation[String] = TypeInformation.of(classOf[String])
   implicit val userType: TypeInformation[User] = TypeInformation.of(classOf[User])
-  /**
-   * 假如我们用从kafka里读取用户的数据写入到mysql中,需求如下<br/>
-   *
-   * <strong>1.从kafka读取用户数据写入到mysql</strong>
-   *
-   * <strong>2. 只要年龄小于30岁的数据</strong>
-   *
-   * <strong>3. kafka数据格式如下:</strong>
-   * {
-   * "name": "benjobs",
-   * "age":  "28",
-   * "gender":   "1",
-   * "address":  "beijing"
-   * }
-   *
-   * <strong>4. mysql表DDL如下:</strong>
-   * create table user(
-   * `name` varchar(32),
-   * `age` int(3),
-   * `gender` int(1),
-   * `address` varchar(255)
-   * )
-   */
+
   override def handle(): Unit = {
     val source = KafkaSource()
       .getDataStream[String]()
