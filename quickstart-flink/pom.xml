@@ -32,6 +32,7 @@
         <module>quickstart-datastream</module>
         <module>quickstart-flinksql</module>
         <module>quickstart-connector</module>
+        <module>quickstart-widetable/widetable_1.14</module>
     </modules>
 
     <properties>
