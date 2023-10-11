@@ -65,7 +65,7 @@ public class BuildMessageFlatMapFunction extends RichFlatMapFunction<String, Mes
     }
 
     private void buidPk(Message item) {
-
+        
         String pkName = Constant.PK;
         String db_table = item.getDb_table();
         if(kpMap.containsKey(db_table)){

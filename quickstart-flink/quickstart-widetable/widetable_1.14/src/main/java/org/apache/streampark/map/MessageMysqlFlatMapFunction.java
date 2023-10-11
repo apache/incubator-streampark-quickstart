@@ -133,7 +133,7 @@ public class MessageMysqlFlatMapFunction extends RichFlatMapFunction<Message, Ch
 
                 Message value = messageList.get(messageList.size()-1);
                 long end = System.currentTimeMillis();
-                //System.out.println("MysqlFlatMap --> subTaskId:" + subTaskId + ",table:" + tableName + ",msg_count:" + messageList.size() + ",usetime:" + (end-start)+",es:" + value.getEs() +",timestamp:"+end);
+                System.out.println("MysqlFlatMap --> subTaskId:" + subTaskId + ",table:" + tableName + ",msg_count:" + messageList.size() + ",usetime:" + (end-start)+",es:" + value.getEs() +",timestamp:"+end);
                 log.info("MysqlFlatMap --> subTaskId:" + subTaskId + ",table:" + tableName + ",msg_count:" + messageList.size() + ",usetime:" + (end-start)+",es:" + value.getEs() +",timestamp:"+end);
 
             }

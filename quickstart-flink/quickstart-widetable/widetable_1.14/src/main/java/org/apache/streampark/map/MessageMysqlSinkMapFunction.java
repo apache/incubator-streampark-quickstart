@@ -98,7 +98,7 @@ public class MessageMysqlSinkMapFunction extends RichMapFunction<Message,Message
                 connection.commit();
 
                 long end = System.currentTimeMillis();
-                //System.out.println("MysqlSinkMap --> subTaskId:" + subTaskId + ",table:" + tableName + ",msg_count:" + messageList.size() + ",usetime:" + (end-start)+",timestamp:"+end);
+                System.out.println("MysqlSinkMap --> subTaskId:" + subTaskId + ",table:" + tableName + ",msg_count:" + messageList.size() + ",usetime:" + (end-start)+",timestamp:"+end);
                 log.info("MysqlSinkMap --> subTaskId:" + subTaskId + ",table:" + tableName + ",msg_count:" + messageList.size() + ",usetime:" + (end-start)+",timestamp:"+end);
             }
         } catch (Exception e){

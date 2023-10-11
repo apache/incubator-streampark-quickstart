@@ -10,46 +10,46 @@ import java.util.Map;
 
 public class DimensionWindowReduceFunction implements ReduceFunction<Message> {
 
+
     @Override
     public Message reduce(Message value1, Message value2) throws Exception {
-        Message newMessage = createMessageCopy(value2);
-        updateResultListMap(newMessage, value1);
-        updateResultListMap(newMessage, value2);
-        return newMessage;
-    }
+        Message newMessage =
+                Message.builder().
+                        pk(value2.getPk()).
+                        pk_col_name(value2.getPk_col_name()).
+                        hash_pk(value2.getHash_pk()).
+                        dbName(value2.getDbName()).
+                        db_table(value2.getDb_table()).
+                        tableName(value2.getTableName()).
+                        type(value2.getType()).
+                        db_table(value2.getDb_table()).
+                        data(value2.getData()).
+                        es(value2.getEs()).
+                        ts(value2.getTs()).
+                        ps(value2.getPs()).
+                        build();
 
-    private Message createMessageCopy(Message originalMessage) {
-        Message newMessage = Message.builder()
-                .pk(originalMessage.getPk())
-                .pk_col_name(originalMessage.getPk_col_name())
-                .hash_pk(originalMessage.getHash_pk())
-                .dbName(originalMessage.getDbName())
-                .db_table(originalMessage.getDb_table())
-                .tableName(originalMessage.getTableName())
-                .type(originalMessage.getType())
-                .data(originalMessage.getData())
-                .es(originalMessage.getEs())
-                .ts(originalMessage.getTs())
-                .ps(originalMessage.getPs())
-                .build();
+        Map<String,List<Message>> reduceListMap1 = value1.getResultListMap();
+        if(reduceListMap1 == null){
+            Map<String,List<Message>>  reduceListMapNew = new HashMap<>();
+            List<Message> list = new ArrayList<>();
+            list.add(value1);
+            reduceListMapNew.put(value1.getDb_table(),list);
+            newMessage.setResultListMap(reduceListMapNew);
 
-        return newMessage;
-    }
-
-    private void updateResultListMap(Message message, Message value) {
-        Map<String, List<Message>> resultListMap = message.getResultListMap();
-
-        if (resultListMap == null) {
-            resultListMap = new HashMap<>();
-            message.setResultListMap(resultListMap);
+        }else{
+            newMessage.setResultListMap(reduceListMap1);
         }
 
-        String dbTable = value.getDb_table();
-
-        if (!resultListMap.containsKey(dbTable)) {
-            resultListMap.put(dbTable, new ArrayList<>());
+        if(!newMessage.getResultListMap().containsKey(value2.getDb_table())){
+            List<Message> list = new ArrayList<>();
+            list.add(value2);
+            newMessage.getResultListMap().put(value2.getDb_table(),list);
+        }else{
+            newMessage.getResultListMap().get(value2.getDb_table()).add(value2);
         }
 
-        resultListMap.get(dbTable).add(value);
+        return newMessage;
     }
 }
+

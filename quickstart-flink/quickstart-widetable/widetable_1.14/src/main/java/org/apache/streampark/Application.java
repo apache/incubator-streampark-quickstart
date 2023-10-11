@@ -3,6 +3,7 @@ package org.apache.streampark;
 
 import com.ververica.cdc.connectors.mysql.source.config.MySqlSourceOptions;
 import com.ververica.cdc.connectors.mysql.table.StartupOptions;
+import net.sf.jsqlparser.JSQLParserException;
 import org.apache.streampark.bean.ChangeLog;
 import org.apache.streampark.map.*;
 import org.apache.streampark.msg.Message;
@@ -30,7 +31,6 @@ import java.util.Map;
  * @date 2023/9/22
  */
 public class Application {
-
 
     /**
      *
@@ -77,8 +77,12 @@ public class Application {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-
         MultipleParameterTool params = MultipleParameterTool.fromArgs(args);
+        Application app = new Application();
+        app.run(params);
+    }
+
+    public  void run(MultipleParameterTool params) throws JSQLParserException {
         ParamUitl.checkRequiredArgument(params, JobOptions.PRE_NAME);
         ParamUitl.checkRequiredArgument(params, SourceOptions.PRE_NAME);
         ParamUitl.checkRequiredArgument(params, DimensionOptions.PRE_NAME);
@@ -166,7 +170,6 @@ public class Application {
 
         tenv.executeSql(insert_flink_sql);
     }
-
 
 
 }

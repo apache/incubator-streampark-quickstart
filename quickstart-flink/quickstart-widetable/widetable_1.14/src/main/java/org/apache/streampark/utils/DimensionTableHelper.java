@@ -111,9 +111,6 @@ public class DimensionTableHelper {
 
         ResultSet rs = p.executeQuery();
 
-        if(rs.getFetchSize() > 10000){
-            System.out.println("findMainKeyBySql >> 逆向查找size超出 10000 :" + rs.getFetchSize());
-        }
         while (rs.next()) {
             String mainKey = rs.getString(1);
             mainKeys.add(mainKey);
