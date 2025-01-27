@@ -16,9 +16,10 @@
  */
 package org.apache.streampark.flink.quickstart.connector;
 
+import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
-import org.apache.streampark.flink.connector.function.SQLQueryFunction;
-import org.apache.streampark.flink.connector.function.SQLResultFunction;
+import org.apache.streampark.flink.connector.function.QueryFunction;
+import org.apache.streampark.flink.connector.function.ResultFunction;
 import org.apache.streampark.flink.connector.jdbc.source.JdbcJavaSource;
 import org.apache.streampark.flink.core.StreamEnvConfig;
 import org.apache.streampark.flink.core.scala.StreamingContext;
@@ -38,9 +39,9 @@ public class MySQLJavaApp {
         StreamingContext context = new StreamingContext(envConfig);
 
         //读取MySQL数据源
-        SingleOutputStreamOperator<Order> source =  new JdbcJavaSource<Order>(context)
+        DataStream<Order> source =  new JdbcJavaSource<>(context, Order.class)
                 .getDataStream(
-                        (SQLQueryFunction<Order>) lastOne -> {
+                        (QueryFunction<Order>) lastOne -> {
                             //5秒抽取一次
                             Thread.sleep(1000);
 
@@ -53,7 +54,7 @@ public class MySQLJavaApp {
                                     lastOffset
                             );
                         },
-                        (SQLResultFunction<Order>) map -> {
+                        (ResultFunction<Order>) map -> {
                             List<Order> result = new ArrayList<>();
                             map.forEach(item -> {
                                 Order order = new Order();
@@ -63,7 +64,7 @@ public class MySQLJavaApp {
                                 result.add(order);
                             });
                             return result;
-                        }, null)
+                        })
                 .returns(TypeInformation.of(Order.class));
 
         source.print("jdbc source: >>>>>");
